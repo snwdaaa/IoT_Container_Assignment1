@@ -1,0 +1,410 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: graphics-lab-html
+  namespace: snwdaaa-dev
+  uid: 66e14ab6-e0ce-422d-8b6b-2506c5c0f3d4
+  resourceVersion: '8893826821'
+  creationTimestamp: '2026-10-29T14:50:56Z'
+  labels:
+    app: graphics-lab
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2026-10-29T15:07:00Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:data':
+          .: {}
+          'f:index.html': {}
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Graphics Lab | Rendering & Geometry</title>
+      <style>
+        :root {
+          --bg: #080c14;
+          --surface: #111827;
+          --border: #283448;
+          --text: #f1f5f9;
+          --muted: #94a3b8;
+          --accent: #5eead4;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+          margin: 0;
+          color: var(--text);
+          font-family: Inter, -apple-system, BlinkMacSystemFont,
+                       "Segoe UI", sans-serif;
+          background:
+            radial-gradient(ellipse at 82% 15%,
+              #123d4d 0%, transparent 38%),
+            radial-gradient(ellipse at 10% 80%,
+              #151d39 0%, transparent 38%),
+            var(--bg);
+          min-height: 100vh;
+        }
+
+        .container {
+          max-width: 1120px;
+          margin: auto;
+          padding: 0 28px;
+        }
+
+        header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 30px 0;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+          font-size: 18px;
+          font-weight: 800;
+          letter-spacing: -0.5px;
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav a {
+          color: var(--muted);
+          text-decoration: none;
+          font-size: 13px;
+          margin-left: 25px;
+          transition: color .2s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        .hero {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          align-items: center;
+          gap: 40px;
+          padding: 110px 0;
+        }
+
+        .eyebrow {
+          color: var(--accent);
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+        }
+
+        h1 {
+          font-size: clamp(44px, 6vw, 76px);
+          line-height: 1.08;
+          letter-spacing: -3px;
+          margin: 22px 0;
+        }
+
+        .gradient {
+          background: linear-gradient(100deg,
+            #5eead4, #60a5fa);
+          color: transparent;
+          -webkit-background-clip: text;
+          background-clip: text;
+        }
+
+        .subtitle {
+          max-width: 490px;
+          color: var(--muted);
+          line-height: 1.8;
+          font-size: 16px;
+        }
+
+        .button {
+          display: inline-block;
+          margin-top: 28px;
+          padding: 14px 23px;
+          border-radius: 9px;
+          background: var(--accent);
+          color: #07131a;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 800;
+          transition: transform .2s, box-shadow .2s;
+        }
+
+        .button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 30px #5eead433;
+        }
+
+        .visual {
+          position: relative;
+          display: grid;
+          place-items: center;
+          min-height: 370px;
+          border: 1px solid #ffffff12;
+          border-radius: 24px;
+          background:
+            linear-gradient(135deg, #ffffff08, #ffffff02);
+          overflow: hidden;
+        }
+
+        .visual::before {
+          content: "";
+          position: absolute;
+          width: 350px;
+          height: 350px;
+          border: 1px dashed #5eead440;
+          border-radius: 50%;
+          transform: rotate(-25deg) scaleY(.56);
+        }
+
+        .orb {
+          width: 210px;
+          height: 210px;
+          border-radius: 50%;
+          position: relative;
+          display: grid;
+          place-items: center;
+          background:
+            radial-gradient(circle at 30% 25%,
+              #7dd3fc, #0f766e 36%,
+              #102a44 67%, #020617 100%);
+          box-shadow:
+            0 0 75px #2dd4bf33,
+            inset -24px -24px 45px #020617aa;
+          animation: float 6s ease-in-out infinite;
+        }
+
+        .orb::after {
+          content: "";
+          position: absolute;
+          width: 275px;
+          height: 275px;
+          border-radius: 50%;
+          border: 1px solid #5eead455;
+          transform: rotate(35deg) scaleY(.5);
+        }
+
+        .orb span {
+          font-size: 44px;
+          font-weight: 900;
+          letter-spacing: -4px;
+          color: #ffffffaa;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+
+        .section-heading {
+          font-size: 26px;
+          letter-spacing: -1px;
+          margin-bottom: 10px;
+        }
+
+        .section-desc {
+          color: var(--muted);
+          font-size: 14px;
+          margin-bottom: 28px;
+        }
+
+        .cards {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 18px;
+          margin-bottom: 75px;
+        }
+
+        .card {
+          padding: 28px;
+          border-radius: 16px;
+          background: linear-gradient(145deg,
+            #172234, #101722);
+          border: 1px solid var(--border);
+          transition: transform .25s, border-color .25s;
+        }
+
+        .card:hover {
+          transform: translateY(-6px);
+          border-color: var(--accent);
+        }
+
+        .card-number {
+          color: var(--accent);
+          font-size: 12px;
+          font-family: monospace;
+        }
+
+        .card h3 {
+          margin: 24px 0 12px;
+          font-size: 20px;
+        }
+
+        .card p {
+          color: var(--muted);
+          font-size: 14px;
+          line-height: 1.7;
+        }
+
+        .tag {
+          display: inline-block;
+          padding: 5px 10px;
+          border: 1px solid #5eead444;
+          border-radius: 20px;
+          color: var(--accent);
+          font-size: 11px;
+          margin-top: 12px;
+        }
+
+        .status {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 20px;
+          padding: 26px;
+          border: 1px solid var(--border);
+          border-radius: 15px;
+          background: #ffffff05;
+        }
+
+        .status-title { font-weight: 700; }
+        .status p {
+          color: var(--muted);
+          font-size: 13px;
+        }
+
+        .indicator {
+          color: var(--accent);
+          font-family: monospace;
+          font-size: 12px;
+        }
+
+        .indicator::before {
+          content: "";
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          margin-right: 10px;
+          background: var(--accent);
+          border-radius: 50%;
+          box-shadow: 0 0 14px var(--accent);
+        }
+
+        footer {
+          color: #64748b;
+          font-size: 12px;
+          padding: 45px 0;
+          text-align: center;
+        }
+
+        @media (max-width: 760px) {
+          .hero {
+            grid-template-columns: 1fr;
+            padding: 65px 0;
+          }
+          .visual { min-height: 300px; }
+          .cards { grid-template-columns: 1fr; }
+          h1 { letter-spacing: -2px; }
+          nav a { margin-left: 12px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            animation: none !important;
+            scroll-behavior: auto !important;
+          }
+        }
+      </style>
+    </head>
+
+    <body>
+      <div class="container">
+        <header>
+          <div class="logo">GRAPHICS<span>LAB.</span></div>
+          <nav>
+            <a href="#about">About</a>
+            <a href="#topics">Topics</a>
+            <a href="#deployment">Deployment</a>
+          </nav>
+        </header>
+
+        <main>
+          <section class="hero" id="about">
+            <div>
+              <div class="eyebrow">
+                Computer Graphics / Research & Development
+              </div>
+              <h1>
+                Exploring<br>
+                <span class="gradient">Digital Worlds.</span>
+              </h1>
+              <p class="subtitle">
+                A personal space for exploring real-time
+                rendering, graphics programming, and
+                computational geometry.
+              </p>
+              <a href="#topics" class="button">
+                Explore Topics &rarr;
+              </a>
+            </div>
+
+            <div class="visual">
+              <div class="orb">
+                <span>GL</span>
+              </div>
+            </div>
+          </section>
+
+          <section id="topics">
+            <h2 class="section-heading">Areas of Interest</h2>
+            <p class="section-desc">
+              Exploring the foundations of modern graphics.
+            </p>
+
+            <div class="cards">
+              <article class="card">
+                <div class="card-number">01 / RENDERING</div>
+                <h3>Real-Time Rendering</h3>
+                <p>
+                  Exploring real-time lighting, shading,
+                  and physically based rendering techniques.
+                </p>
+                <span class="tag">Graphics</span>
+              </article>
+
+              <article class="card">
+                <div class="card-number">02 / PROGRAMMING</div>
+                <h3>OpenGL & C++</h3>
+                <p>
+                  Learning graphics pipelines, shaders,
+                  GPU programming, and modern C++.
+                </p>
+                <span class="tag">Development</span>
+              </article>
+
+              <article class="card">
+                <div class="card-number">03 / GEOMETRY</div>
+                <h3>Geometry Processing</h3>
+                <p>
+                  Studying curves, surfaces, geometric
+                  representations, and related algorithms.
+                </p>
+                <span class="tag">Mathematics</span>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
+    </body>
+    </html>
